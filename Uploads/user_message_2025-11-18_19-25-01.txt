@@ -1,0 +1,122 @@
+Proyecto: "numbrica" — Plataforma de Astrología, Cartas Astrales y Numerología (MVP en ESPAÑOL)
+
+Resumen ejecutivo (objetivo):
+Crear la plataforma web (responsive + PWA opcional) en ESPAÑOL que ofrezca:
+- Cartas astrales completas (astrología natal y tránsitos), y
+- Análisis de numerología (método por defecto: Pythagorean; opción Chaldean),
+integrados en un informe único. Precio: 399 MXN (pago único) y suscripción mensual de 100 MXN para recibir un análisis semanal automatizado (tránsitos + numerología). 
+
+Tono:
+- El proyecto numbrica debe tener un tono claramente esotérico, místico y simbólico.
+- No quiero explicaciones técnicas ni científicas, ni secciones de "metodología" ni "datos astronómicos". No mencionar efemérides, fórmulas ni nada similar.
+- El lenguaje debe:
+  - Ser profundo pero claro, sin jerga complicada.
+  - Usar imágenes simbólicas (luz, puertas, caminos, semillas, fuego, agua, etc.).
+  - Conectar con el lector desde el alma, hablando de propósito, aprendizajes, ciclos, energía, destino, misión, etc.
+- El enfoque es siempre el de una herramienta de autoconocimiento y acompañamiento espiritual.
+- Las plantillas de interpretación serán generadas automáticamente por IA pero NO se publicarán hasta la revisión y aprobación manual del stakeholder.
+
+Activos ya disponibles (logos y mockups):
+- El stakeholder ya cuenta con logo y mockups bajo los nombres:
+  - download (34).png
+  - download (33).png
+  - download (32).png
+  - download (31).png
+  - download (30).png
+DeepAgent debe usarlos como base de branding para la web, PDFs y materiales visuales.
+
+Alcance funcional (MVP, entregable para 01/12/2025, solo ESPAÑOL):
+1. Interfaz 100% en ESPAÑOL (UI, emails, PDFs, textos legales).  
+2. Registro/login (email + contraseña) y recuperación por email (token expirable 1 hora).  
+3. Formulario de datos:
+   - Nombre completo (y nombre al nacer).
+   - Fecha de nacimiento (DD/MM/AAAA).
+   - Hora de nacimiento (HH:MM; opción “no conozco mi hora exacta” con disclaimer de precisión).
+   - Lugar de nacimiento (autocompletado + geocoding → lat/lon).
+   - Email.
+   - Teléfono (opcional).
+   - Consentimientos (servicio y marketing, por separado).
+4. Checkout:
+   - Integrar Stripe + Mercado Pago (sandbox y luego producción).
+   - Mostrar precios en moneda local con conversión automática usando la tasa del proveedor.
+   - Soportar pago único (399 MXN) y suscripción (100 MXN/mes).
+
+Productos principales:
+
+1. Producto A – "Informe Esencial Numbrica" (pago único, actualmente 399 MXN):
+   - Debe incluir:
+     - Carta natal astrológica completa (Sol, Luna, Ascendente, planetas, nodo, aspectos principales).
+     - Interpretación estructurada con lenguaje puramente esotérico/simbólico.
+     - Informe numerológico completo (camino de vida, alma, personalidad, expresión, año personal) descrito siempre en clave simbólica.
+     - Una sección de integración donde se una la astrología y la numerología como dos lenguajes que hablan de la misma alma.
+     - No incluir ninguna sección técnica, científica o de metodología.
+
+2. Producto B – "Suscripción Numbrica Semanal" (100 MXN/mes):
+   - Cada semana se debe generar un informe automatizado que incluya:
+     - Tránsitos astrológicos clave sobre la carta natal (especialmente Sol, Luna, Marte, Júpiter, Saturno con orbes pequeños).
+     - Interpretaciones por temas (energía general, trabajo/proyectos, relaciones, bienestar).
+     - Sección numerológica semanal (número de la semana + recordatorio de año personal).
+   - Cada bloque debe ser puramente esotérico, hablando del "clima energético" y las invitaciones simbólicas de la semana.
+   - No incluir ninguna sección técnica, científica o de metodología.
+
+5. Cálculos astrológicos:
+   - Cálculo de carta astral (carta natal) con Swiss Ephemeris (pyswisseph).
+   - Sistema de casas por defecto: Placidus (ofrecer Whole Sign como opción avanzada en la cuenta del usuario más adelante, pero no obligatorio para el MVP).
+   - Elementos a incluir en el informe:
+     - Posición del Sol, Luna, Ascendente, planetas personales y sociales, nodo lunar, aspectos principales.
+     - Interpretaciones por: Planeta en signo, Planeta en casa, Aspectos principales (conjunción, oposición, cuadratura, trígono, sextil).
+   - Tránsitos: Para el informe semanal, recalcular tránsitos relevantes de la semana sobre la carta natal (especialmente Sol, Luna, Marte, Júpiter, Saturno) y generar un mini informe.
+6. Numerología:
+   - Método Pythagorean por defecto.
+   - Cálculos: Número de camino de vida/destino, Número del alma, Número de personalidad, Número de expresión, Año personal y ciclo actual.
+7. Generación de informe individual (PDF + vista web) con diseño corporativo usando los logos/mocks subidos. Plantillas de interpretación generadas automáticamente por IA, marcadas como "PENDIENTE DE APROBACIÓN" hasta revisión manual.  
+8. Panel admin mínimo: ver pedidos/usuarios/suscripciones, forzar reenvíos y ver logs.  
+9. Documentación legal inicial: Aviso de Privacidad y TOS en español (placeholders [COMPLETAR] para datos legales). Implementar consentimiento granular y registro de consentimientos con timestamps.  
+10. QA y E2E: pruebas del flujo registro → checkout (sandbox) → generación de PDF → entrega por email.  
+11. Deploy a staging y checklist para producción.
+
+Entregables (que DeepAgent debe crear):
+- Repositorio inicial (frontend Next.js + backend FastAPI) con README y scripts para despliegue en staging.  
+- Wireframes y prototipo clickable (desktop + mobile) en español.  
+- Integración Stripe + Mercado Pago en sandbox y documentación de pasos para producción (incluye webhooks).  
+- Motor astrológico (pyswisseph) y motor numerología (Pythagorean) con tests unitarios básicos.  
+- Plantillas IA en español (corpus inicial de ~200 snippets por sección) con el tono esotérico solicitado, marcadas "Pendiente de Aprobación". Proveer una UI simple para revisar/editar/autorizar cada plantilla.  
+- Generador de PDF (HTML→PDF) que incorpore los logos/mocks subidos (usar los archivos listados arriba).  
+- Panel admin básico y endpoints para operaciones críticas.  
+- Aviso de Privacidad y TOS en español (borradores).  
+- Checklist de lanzamiento y plan de rollback.
+
+Requerimientos técnicos (stack):
+- Frontend: Next.js + TypeScript + i18n (ES), PWA opcional, deploy en Vercel.
+- Backend: Python (FastAPI) + pyswisseph.
+- Workers/cola: Redis + Celery (para generación de PDFs, automatizaciones futuras).
+- DB: PostgreSQL (managed).
+- PDFs: WeasyPrint (recomendado).
+- Pagos: Stripe + Mercado Pago.
+- Emails: SendGrid o Amazon SES.
+- Observabilidad: Sentry.
+- Infra: Vercel (frontend) + AWS/Render (backend); CDN Cloudflare opcional.
+
+Condiciones operativas:
+- Idioma único inicial: ESPAÑOL. No generar textos en otros idiomas hasta nueva orden.
+- Todas las plantillas generadas por IA deben quedar en estado "PENDIENTE" para revisión humana; no publicarlas. Stakeholder hará la revisión y aprobación final.
+- Políticas: incluir texto visible en checkout "No ofrecemos reembolsos" y proceso de atención a disputas.
+- Seguridad: TLS, cifrado PII at rest, DPA con proveedores.
+
+Acciones automáticas que DeepAgent debe ejecutar al iniciar:
+1. Crear repositorio con estructura (frontend Next.js, backend FastAPI, carpeta /assets con los archivos subidos).
+2. Generar wireframes y mockups iniciales usando los logos subidos.
+3. Implementar endpoints mock para checkout y PDF (con generador de ejemplo usando el logo embebido).
+4. Generar corpus inicial de plantillas IA en español (200 snippets/section) con el tono esotérico solicitado y colocarlas en la UI de revisión como "Pendiente de Aprobación".
+5. Configurar sandbox Stripe y Mercado Pago y documentar pasos para provisión de claves en producción.
+
+Preguntas que DeepAgent debe hacer al stakeholder antes de comenzar:
+1. ¿Cuál es la razón social, dirección y correos oficiales (por ejemplo, privacidad@numbrica.com, soporte@numbrica.com) o se dejan placeholders?
+2. ¿Qué proveedor de email transaccional se va a usar (SendGrid o SES)?
+3. ¿Se desea un switch en el informe para "modo más místico" vs "modo más técnico" (por ejemplo, para usuarios escépticos)? (NOTA: Esta pregunta es para confirmar si el stakeholder quiere mantener la opción de un tono más técnico en el futuro, aunque el MVP sea puramente esotérico).
+
+Plazo y prioridades:
+- Fecha objetivo MVP: 01/12/2025. Priorizar funcionalidades listadas en "Alcance funcional (MVP)".
+- Funcionalidades no críticas (WhatsApp automático, SSO con Apple/X, automatización semanal completa) se planifican en Fase 2 posterior al MVP.
+
+FIN DEL PROMPT
